@@ -10,6 +10,29 @@
 # 表达式中不含除零运算。
 # 输入是一个根据逆波兰表示法表示的算术表达式。
 # 答案及所有中间计算结果可以用 32 位 整数表示。
+"""
+1. Problem Description
+输入是逆波兰表达式（后缀表达式）数组，要求算出最终结果。特点是运算符写在两个数字后面。
+
+2. Solution Approach
+标准栈做法：
+- 扫描 tokens。
+- 遇到数字就入栈。
+- 遇到运算符就弹出两个数字，计算后再把结果压回栈。
+- 扫描结束后，栈里最后一个数字就是答案。
+
+3. Code Walkthrough
+- `num_stack` 保存操作数。
+- 每次遇到 `+ - * /`，先 `pop` 出 `num2` 和 `num1`，注意顺序不能反。
+- 用 `operate` 统一执行运算，除法用 `int(num1/num2)` 做向零截断。
+- 结果再次压回 `num_stack`。
+
+4. Key Takeaways
+- 后缀表达式题几乎都是“一个栈”模板。
+- 时间复杂度 O(n)，空间复杂度 O(n)。
+- 最大坑是减法/除法顺序：必须是 `num1 operator num2`。
+- 向零截断和 Python 地板除要区分清楚。
+"""
 from typing import List
 class Solution:
     def evalRPN(self, tokens: List[str]) -> int:

@@ -1,3 +1,25 @@
+"""
+1. Problem Description
+复制一个带 `random` 指针的链表。新链表要和原链表“结构完全一致”，但所有节点都必须是新对象，不能共用原节点。
+
+2. Solution Approach
+这份代码用“数组映射”的思路：
+- 第一次遍历：把原节点按顺序放进 `origin_list`，同时创建新节点链表放进 `list_result`。
+- 第二次遍历：对每个原节点，通过 `origin_list.index(原.random)` 找到 random 目标下标，再把新节点的 `random` 指过去。
+
+3. Code Walkthrough
+- `dummy/res`：用于串起复制后的新链表。
+- `origin_list.append(head)`：保存原节点顺序，后面定位 random 用。
+- `res.next = Node(head.val)`：创建对应新节点。
+- `list_result.append(None)`：让 `-1` 索引可以自然映射到 `None`。
+- 第二轮循环里，`list_result[i].random = list_result[index_random]` 完成 random 复制。
+
+4. Key Takeaways
+- 复制带随机指针结构时，核心是“原节点 -> 新节点”的映射关系。
+- 这版主要瓶颈在 `index` 查找，最坏会到 O(n^2)；空间 O(n)。
+- 更优写法是哈希表直接映射节点对象，可做到 O(n) 时间。
+- 这类题要确认两件事：值复制正确、指针关系复制正确。
+"""
 ##重做！最好时间复杂度是O(N)
 # 给你一个长度为 n 的链表，每个节点包含一个额外增加的随机指针 random ，该指针可以指向链表中的任何节点或空节点。
 

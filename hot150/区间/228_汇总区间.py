@@ -8,6 +8,32 @@
 #
 # "a->b" ，如果 a != b
 # "a" ，如果 a == b
+"""
+1. Problem Description
+给一个有序且无重复的数组，把连续数字压缩成区间字符串：
+- 单个数写成 `"a"`
+- 连续段写成 `"a->b"`
+
+2. Solution Approach
+线性扫描分段：
+- 用 `temp` 维护当前连续段。
+- 下一个数如果是 `temp` 末尾 +1，就继续扩展。
+- 否则当前段结束，存入 `list_`，再开新段。
+- 最后把每段转成题目要求格式。
+
+3. Code Walkthrough
+- 先处理空数组和单元素的边界。
+- `for num in nums` 持续构建 `temp`。
+- 断开时把 `temp` 放进 `list_`，重置为新起点。
+- 末尾还要再 `append(temp)`，避免漏最后一段。
+- 最终根据段长度决定输出 `"a"` 或 `"a->b"`。
+
+4. Key Takeaways
+- 这是典型“连续段压缩”问题。
+- 时间复杂度 O(n)，空间复杂度 O(n)（输出）。
+- 常见坑：忘记处理最后一段。
+- 这个模式可迁移到日志压缩、区间统计等场景。
+"""
 from typing import List
 class Solution:
     def summaryRanges(self, nums: List[int]) -> List[str]:

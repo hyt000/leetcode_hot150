@@ -12,6 +12,29 @@
 '''
 切片赋值时右边必须是iterable
 '''
+"""
+1. Problem Description
+给定一个已经按起点排序且互不重叠的区间列表，再给一个新区间。要把新区间插进去，并在必要时和重叠区间合并。
+
+2. Solution Approach
+这份代码做法是：
+- 先把新区域追加到原列表。
+- 重新按起点排序。
+- 线性扫描找出需要合并的连续区间范围。
+- 用切片把这段替换成一个合并后的新区间。
+
+3. Code Walkthrough
+- `intervals.append(newInterval)` 后调用 `paixv` 排序。
+- 扫描时用 `current` 维护当前合并段的右端点。
+- `merge_list` 记录被并入的区间下标范围。
+- 扫描结束后，用切片赋值把 `[new_begin:new_end]` 替换成一个新区间。
+
+4. Key Takeaways
+- 插入区间题本质还是“区间合并”的变体。
+- 时间复杂度 O(n log n)（因为这版做了排序），空间复杂度 O(1)~O(n)。
+- 常见坑：新区间在最前、最后，或被完全包含。
+- 若利用原数组已排序且不重叠特性，可进一步做到线性合并 O(n)。
+"""
 from typing import List
 class Solution:
     def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:

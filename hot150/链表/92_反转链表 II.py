@@ -1,3 +1,27 @@
+"""
+1. Problem Description
+只反转链表中从 `left` 到 `right` 这段区间，其他位置保持不变。
+
+2. Solution Approach
+思路是局部头插法：
+- 先找到反转区间前一个节点 `pre`，区间起点 `left_node`，区间终点 `right_node`。
+- 在区间内不断把 `left_node` 后面的节点摘出来，插到 `pre` 后面。
+- 重复直到 `right_node` 被移动到区间头部。
+
+3. Code Walkthrough
+- 代码分两种情况：`left != 1` 和 `left == 1`。
+- 当 `left == 1` 时，额外引入 `fake_node`，避免头节点变化不好处理。
+- `while True` 里：
+  - 若 `left_node.next == right_node`，做最后一次调整并结束。
+  - 否则执行一次头插：`pre.next = left_node.next`，并重连后续指针。
+- 最后返回新的头节点（可能变化）。
+
+4. Key Takeaways
+- 局部反转最关键是找到“反转前驱节点 `pre`”。
+- 时间复杂度 O(n)，空间复杂度 O(1)。
+- `left == 1` 是高频边界，建议统一用 `dummy/fake_node` 处理。
+- 每次改指针前先画出 3~4 个关键节点关系，错误率会明显下降。
+"""
 # 给你单链表的头指针 head 和两个整数 left 和 right ，其中 left <= right 。
 # 请你反转从位置 left 到位置 right 的链表节点，返回 反转后的链表 。
 # Definition for singly-linked list.

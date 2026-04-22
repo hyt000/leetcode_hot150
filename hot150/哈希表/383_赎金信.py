@@ -19,6 +19,30 @@
 
 
 
+"""
+1. Problem Description
+判断 `ransomNote` 能不能由 `magazine` 里的字符拼出来；`magazine` 每个字符最多只能用一次。
+
+2. Solution Approach
+字符计数哈希：
+- 先统计 `magazine` 每个字符出现次数。
+- 再遍历 `ransomNote`，每需要一个字符就把对应计数减 1。
+- 如果某字符不存在或数量不够，直接返回 False。
+
+3. Code Walkthrough
+- `all_str[string] = all_str.get(string, 0) + 1`：构建库存。
+- 遍历赎金信字符：
+  - `if string not in all_str`：完全没有该字符，失败。
+  - `if all_str[string] == 0`：库存耗尽，失败。
+  - 否则 `all_str[string] -= 1`。
+- 全部通过返回 True。
+
+4. Key Takeaways
+- 这是非常典型的“供需匹配 + 计数器”问题。
+- 时间复杂度 O(m+n)，空间复杂度 O(k)（k 为字符种类数）。
+- 常见坑：只判断是否存在，不判断次数。
+- 字符频次题优先考虑哈希计数（或 `Counter`）。
+"""
 class Solution:
     def canConstruct(self, ransomNote: str, magazine: str) -> bool:
         all_str = {}
