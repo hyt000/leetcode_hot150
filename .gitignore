@@ -1,0 +1,13 @@
+# 编辑器配置
+.idea/
+.vscode/
+
+# Python 虚拟环境
+.venv/
+venv/
+__pycache__/
+
+# 其他
+*.pyc
+*.pyo
+*.pyd
