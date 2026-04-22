@@ -1,5 +1,3 @@
-
-md id="d692fc"
 # 🚀 LeetCode Hot 150
 
 <p align="center">
