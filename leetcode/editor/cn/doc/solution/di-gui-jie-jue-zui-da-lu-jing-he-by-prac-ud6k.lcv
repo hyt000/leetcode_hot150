@@ -1,0 +1,29 @@
+### 解题思路
+
+此处撰写解题思路
+
+### 代码
+
+* python3
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def maxPathSum(self, root: TreeNode) -> int:
+        self.maxp = float("-inf")
+        def dfs(root):
+            if not root: return 0
+            left = dfs(root.left)
+            right = dfs(root.right)
+            self.maxp = max(self.maxp, left+right+root.val)#更新当前节点以下的最大值（含当前节点）
+            return max(0, max(left, right) + root.val)#在本题中，这个路径可以是任意一个路径，甚至可以只是一个节点，所以我每次比较的都是当前节点的左子树和右子树的大小，那个大选哪个，然后还要加上这个根节点的值val，最后与0相比较，因为如果这个树枝比0还小，那不要也罢，直接返回0，要不然最大值还减小了
+
+        dfs(root)
+        return self.maxp
+```
+
