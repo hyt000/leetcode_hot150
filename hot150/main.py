@@ -1,1 +1,1 @@
-print("test")
+[2].append(0)
